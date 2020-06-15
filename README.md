@@ -1,6 +1,6 @@
 # Dailybk
 
-Bash para descargar el respadlo diario desde el vps de focused.cl
+Bash para descargar el respaldo diario desde el vps de focused.cl
 
 ## Index
 
@@ -11,7 +11,8 @@ Bash para descargar el respadlo diario desde el vps de focused.cl
 1. Como usar
    1. Terminal
    1. Servicio al inicio
-   1. Cronjob
+   1. [Cronjob](#Cronjob)
+1. Problemas Frecuentes 
 
 ### Requisitos
 Corre sobre GNU/Linux. Es neceario que este instalado scp para realizar la copia segura vía ssh y ssh-keygen para borrar la passphrase de la llave de identidad ssh.
