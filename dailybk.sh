@@ -1,37 +1,36 @@
 #!/bin/bash
 clear
-echo "------ $0 PID:$$ START--------"
-# colores
-red=$'\e[1;31m'
-grn=$'\e[1;32m'
-yel=$'\e[1;33m'
-blu=$'\e[1;34m'
-mag=$'\e[1;35m'
-cyn=$'\e[1;36m'
-end=$'\e[0m'
-
-#BASE URL
+# BASE URL
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function out {
+    echo $3 $(date +"%m-%d-%Y %T") $1 | tee $2 $DIR/out.log
+}
+
+
+out "$0 PID:$$ START --------"
 
 # setData 
 source $DIR/data.conf
-#makeDestiny()
+# makeDestiny()
 cd $destiny
-mkdir -v "$destiny/$dateBackup" &> $DIR/output.log
+mkdir -v "$destiny/$dateBackup" &>>$DIR/out.log
+
 if [ $? -ne 0 ] ; then      
-    echo "a $? el directorio origen ya existe"
+    out "el directorio de destino ya existe" -a
 else    
-    echo "b $?  directorio creado: $dateBackup"
+    out "directorio creado: $dateBackup" -a
     # getCopy()
-    scp -o StrictHostKeyChecking=no -i $key $user@$host:$origin "$destiny/$dateBackup" 2> $DIR/output.log    
+    out "intentando la descarga..." -a
+    script -q -c "scp -o StrictHostKeyChecking=no -i $key $user@$host:$origin '$destiny/$dateBackup'" >>$DIR/out.log # intentar con tee
     if [ $? -ne 0 ] ; then
-        echo "c $?  no se encuentra fichero de origen"
+        out "no se encuentra fichero de origen" -a        
     else        
-        echo "d $?  descarga completada"
+        out "descarga completada" -a
         # listDestiny()
-        echo "creando lista..."         
-        ls --full-time -ghR &>$DIR/output.log && echo "e $? terminado."
+        out "creando lista..." -a
+        ls --full-time -ghR | tee -a $DIR/out.log 
     fi
 fi
 
-echo -e "\n------" $0 PID:$$ END"--------"
+out "$0 PID:$$ END--------\n" -a -e
