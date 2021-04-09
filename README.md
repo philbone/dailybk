@@ -1,6 +1,6 @@
 # Dailybk
 
-Bash para descargar el respaldo diario desde el vps de focused.cl
+Bash para descargar ficheros desde una máquina remota de forma cronometrada.
 
 ## Index
 
@@ -15,7 +15,7 @@ Bash para descargar el respaldo diario desde el vps de focused.cl
 1. Problemas Frecuentes 
 
 ### Requisitos
-Corre sobre GNU/Linux. Es neceario que este instalado scp para realizar la copia segura vía ssh y ssh-keygen para borrar la passphrase de la llave de identidad ssh.
+Corre sobre GNU/Linux. Es necesario que este instalado scp para realizar la copia segura vía ssh, y ssh-keygen para borrar la passphrase de la llave de identidad ssh.
 
 ### Instalación
 
